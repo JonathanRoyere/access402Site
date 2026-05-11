@@ -1,0 +1,948 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Access402 | Gate and Monetize Content, Files, and Endpoints</title>
+  <meta name="description" content="Access402 helps teams sell content, data, and workflows to AI agents through paid access while reducing the friction of setup, monetization, and delivery.">
+  <meta name="author" content="Jonathan Royere">
+  <meta name="robots" content="index,follow">
+  <meta name="theme-color" content="#0e1d35">
+  <meta name="application-name" content="Access402">
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="Access402 | Gate and Monetize Content, Files, and Endpoints">
+  <meta property="og:description" content="Access402 helps teams sell content, data, and workflows to AI agents through paid access while reducing the friction of setup, monetization, and delivery.">
+  <meta property="og:image" content="images/screenshots/payment-screen.png">
+  <meta property="og:image:alt" content="Access402 payment screen">
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="Access402 | Gate and Monetize Content, Files, and Endpoints">
+  <meta name="twitter:description" content="Access402 helps teams sell content, data, and workflows to AI agents through paid access while reducing the friction of setup, monetization, and delivery.">
+  <meta name="twitter:image" content="images/screenshots/payment-screen.png">
+  <meta name="twitter:creator" content="@jonathan_royere">
+  <meta name="twitter:site" content="@jonathan_royere">
+  <link rel="icon" type="image/png" href="images/logo.png">
+  <link rel="apple-touch-icon" href="images/logo.png">
+  <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+  <style>
+    :root {
+      --navy-950: #081426;
+      --navy-900: #0e1d35;
+      --navy-800: #173055;
+      --navy-700: #21426f;
+      --sky-400: #70c4ff;
+      --sky-200: #c8e8ff;
+      --paper: #f4f7fb;
+      --white: #ffffff;
+      --ink: #10223f;
+      --muted: #5d6f8d;
+      --line: rgba(16, 34, 63, 0.12);
+      --glow: rgba(112, 196, 255, 0.35);
+      --shadow: 0 30px 80px rgba(5, 14, 28, 0.16);
+      --radius-xl: 28px;
+      --radius-lg: 20px;
+      --radius-md: 16px;
+      --max-width: 1180px;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      margin: 0;
+      font-family: "Avenir Next", "Segoe UI", sans-serif;
+      background:
+        radial-gradient(circle at top left, rgba(112, 196, 255, 0.22), transparent 34%),
+        radial-gradient(circle at 80% 20%, rgba(18, 70, 128, 0.2), transparent 26%),
+        linear-gradient(180deg, #f7fbff 0%, #eef3f9 42%, #ffffff 100%);
+      color: var(--ink);
+    }
+
+    h1,
+    h2,
+    h3,
+    .stat-number {
+      font-family: "Iowan Old Style", "Palatino Linotype", serif;
+      letter-spacing: -0.03em;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    img {
+      max-width: 100%;
+      display: block;
+    }
+
+    .page-shell {
+      overflow: clip;
+    }
+
+    .container {
+      width: min(calc(100% - 2rem), var(--max-width));
+      margin: 0 auto;
+    }
+
+    .site-header {
+      background: rgba(247, 251, 255, 0.92);
+      border-bottom: 1px solid rgba(16, 34, 63, 0.06);
+    }
+
+    .nav {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1rem;
+      padding: 0.9rem 0;
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 0.9rem;
+      font-weight: 700;
+      color: var(--navy-900);
+      letter-spacing: 0.02em;
+    }
+
+    .brand-mark {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 76px;
+      height: 48px;
+      padding: 0.35rem 0.55rem;
+      border-radius: 15px;
+      background: rgba(255, 255, 255, 0.92);
+      border: 1px solid rgba(16, 34, 63, 0.08);
+      box-shadow: 0 18px 34px rgba(16, 34, 63, 0.12);
+    }
+
+    .brand-mark img {
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+    }
+
+    .brand-copy {
+      font-size: 1.05rem;
+    }
+
+    .nav-links {
+      display: flex;
+      align-items: center;
+      flex-wrap: wrap;
+      justify-content: flex-end;
+      gap: 0.8rem;
+      color: var(--muted);
+      font-size: 0.96rem;
+    }
+
+    .nav-links a:hover,
+    .nav-links a:focus-visible,
+    .button:hover,
+    .button:focus-visible {
+      opacity: 0.86;
+    }
+
+    .button {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.55rem;
+      padding: 0.95rem 1.35rem;
+      border-radius: 999px;
+      border: 1px solid transparent;
+      font-weight: 700;
+      transition: opacity 160ms ease, transform 160ms ease, border-color 160ms ease;
+    }
+
+    .button:hover,
+    .button:focus-visible {
+      transform: translateY(-1px);
+    }
+
+    .button-primary {
+      background: var(--navy-900);
+      color: var(--white);
+      box-shadow: 0 16px 40px rgba(16, 34, 63, 0.18);
+    }
+
+    .button-secondary {
+      background: rgba(255, 255, 255, 0.72);
+      border-color: rgba(16, 34, 63, 0.12);
+      color: var(--navy-900);
+    }
+
+    .icon-link {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 2.9rem;
+      height: 2.9rem;
+      border-radius: 999px;
+      border: 1px solid rgba(16, 34, 63, 0.12);
+      background: rgba(255, 255, 255, 0.72);
+      color: var(--navy-900);
+      transition: opacity 160ms ease, transform 160ms ease, border-color 160ms ease;
+    }
+
+    .icon-link svg {
+      width: 1.2rem;
+      height: 1.2rem;
+      fill: currentColor;
+    }
+
+    .hero {
+      padding: 5rem 0 3.5rem;
+    }
+
+    .hero-grid {
+      display: grid;
+      grid-template-columns: minmax(0, 1.15fr) minmax(320px, 0.85fr);
+      gap: 2rem;
+      align-items: center;
+    }
+
+    .hero h1 {
+      margin: 0 0 1rem;
+      font-size: clamp(2.2rem, 4.4vw, 3.6rem);
+      line-height: 0.98;
+      color: var(--navy-950);
+    }
+
+    .hero p {
+      margin: 0;
+      max-width: 40rem;
+      font-size: 1.14rem;
+      line-height: 1.75;
+      color: var(--muted);
+    }
+
+    .hero-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.9rem;
+      margin-top: 1.8rem;
+    }
+
+    .hero-note {
+      margin-top: 1.2rem;
+      font-size: 0.96rem;
+      color: var(--muted);
+      max-width: 38rem;
+    }
+
+    .hero-card {
+      position: relative;
+      padding: 1.5rem;
+      border-radius: var(--radius-xl);
+      background: linear-gradient(180deg, var(--navy-900), #09172b);
+      color: var(--white);
+      box-shadow: var(--shadow);
+      isolation: isolate;
+    }
+
+    .product-shot {
+      padding: 1rem;
+      overflow: hidden;
+    }
+
+    .product-shot img {
+      width: 100%;
+      border-radius: 22px;
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      box-shadow: 0 22px 54px rgba(0, 0, 0, 0.24);
+    }
+
+    .hero-shot-caption {
+      display: grid;
+      gap: 0.35rem;
+      margin-top: 1rem;
+    }
+
+    .hero-shot-caption strong {
+      font-size: 1rem;
+      color: var(--white);
+    }
+
+    .hero-shot-caption span {
+      color: rgba(255, 255, 255, 0.72);
+      line-height: 1.6;
+      font-size: 0.95rem;
+    }
+
+    .hero-card::before,
+    .hero-card::after {
+      content: "";
+      position: absolute;
+      border-radius: 50%;
+      filter: blur(8px);
+      z-index: -1;
+      animation: drift 10s ease-in-out infinite;
+    }
+
+    .hero-card::before {
+      width: 210px;
+      height: 210px;
+      right: -48px;
+      top: -48px;
+      background: rgba(112, 196, 255, 0.22);
+    }
+
+    .hero-card::after {
+      width: 170px;
+      height: 170px;
+      left: -30px;
+      bottom: -42px;
+      background: rgba(39, 88, 148, 0.28);
+      animation-delay: -3s;
+    }
+
+    .card-icon {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+      border-radius: 999px;
+    }
+
+    .card-icon svg {
+      width: 1.2rem;
+      height: 1.2rem;
+      fill: currentColor;
+    }
+
+    .section {
+      padding: 2rem 0 4rem;
+    }
+
+    .section-header {
+      display: grid;
+      grid-template-columns: minmax(0, 0.85fr) minmax(0, 1fr);
+      gap: 1.5rem;
+      align-items: end;
+      margin-bottom: 1.75rem;
+    }
+
+    .section-header h2 {
+      margin: 0;
+      font-size: clamp(1.95rem, 3.8vw, 3rem);
+      line-height: 0.98;
+      color: var(--navy-950);
+    }
+
+    .section-header p {
+      margin: 0;
+      font-size: 1.04rem;
+      line-height: 1.72;
+      color: var(--muted);
+    }
+
+    .card-grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 1rem;
+    }
+
+    .shot-grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 1rem;
+    }
+
+    .shot-card {
+      padding: 1rem;
+      border-radius: var(--radius-lg);
+      background: rgba(255, 255, 255, 0.9);
+      border: 1px solid var(--line);
+      box-shadow: 0 18px 46px rgba(10, 25, 47, 0.06);
+    }
+
+    .shot-card img {
+      width: 100%;
+      border-radius: 16px;
+      border: 1px solid rgba(16, 34, 63, 0.08);
+      box-shadow: 0 14px 30px rgba(10, 25, 47, 0.08);
+    }
+
+    .shot-copy {
+      margin-top: 0.95rem;
+    }
+
+    .shot-copy h3 {
+      margin: 0 0 0.35rem;
+      font-size: 1.15rem;
+      color: var(--navy-900);
+    }
+
+    .shot-copy p {
+      margin: 0;
+      color: var(--muted);
+      line-height: 1.65;
+      font-size: 0.95rem;
+    }
+
+    .card {
+      padding: 1.4rem;
+      border-radius: var(--radius-lg);
+      background: rgba(255, 255, 255, 0.88);
+      border: 1px solid var(--line);
+      box-shadow: 0 18px 46px rgba(10, 25, 47, 0.06);
+    }
+
+    .card-icon {
+      width: 2.8rem;
+      height: 2.8rem;
+      margin-bottom: 0.95rem;
+      background: linear-gradient(180deg, rgba(91, 188, 255, 0.14), rgba(27, 76, 134, 0.16));
+      border: 1px solid rgba(16, 34, 63, 0.08);
+      color: var(--navy-800);
+    }
+
+    .card h3 {
+      margin: 0 0 0.55rem;
+      font-size: 1.26rem;
+      color: var(--navy-900);
+    }
+
+    .card p {
+      margin: 0;
+      color: var(--muted);
+      line-height: 1.7;
+    }
+
+    .stat-strip {
+      margin-top: 1rem;
+      padding: 1.1rem;
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 0.9rem;
+      border-radius: var(--radius-lg);
+      background: linear-gradient(180deg, rgba(10, 25, 47, 0.96), rgba(11, 30, 56, 0.94));
+      box-shadow: var(--shadow);
+    }
+
+    .stat {
+      padding: 1rem;
+      border-radius: 18px;
+      background: rgba(255, 255, 255, 0.06);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+    }
+
+    .stat-number {
+      margin-bottom: 0.35rem;
+      font-size: 2rem;
+      color: var(--white);
+    }
+
+    .stat-copy {
+      color: rgba(255, 255, 255, 0.76);
+      line-height: 1.6;
+      font-size: 0.94rem;
+    }
+
+    .flow {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 1rem;
+    }
+
+    .flow-step {
+      padding: 1.45rem;
+      border-radius: var(--radius-lg);
+      background: linear-gradient(180deg, rgba(255, 255, 255, 0.94), rgba(245, 249, 255, 0.96));
+      border: 1px solid rgba(16, 34, 63, 0.08);
+    }
+
+    .flow-step strong {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 2.2rem;
+      height: 2.2rem;
+      margin-bottom: 0.85rem;
+      border-radius: 999px;
+      background: var(--navy-900);
+      color: var(--white);
+      font-size: 0.92rem;
+    }
+
+    .flow-step h3 {
+      margin: 0 0 0.5rem;
+      font-size: 1.24rem;
+      color: var(--navy-900);
+    }
+
+    .flow-step p {
+      margin: 0;
+      color: var(--muted);
+      line-height: 1.7;
+    }
+
+    .cta-panel {
+      position: relative;
+      padding: 2rem;
+      border-radius: 32px;
+      background:
+        radial-gradient(circle at 20% 20%, rgba(112, 196, 255, 0.18), transparent 26%),
+        linear-gradient(140deg, #0a1830, #13325b 58%, #1d4a7f 100%);
+      color: var(--white);
+      box-shadow: var(--shadow);
+    }
+
+    .cta-panel h2 {
+      margin: 0 0 0.7rem;
+      font-size: clamp(2rem, 3.6vw, 3rem);
+      line-height: 0.98;
+    }
+
+    .cta-panel p {
+      max-width: 42rem;
+      margin: 0;
+      color: rgba(255, 255, 255, 0.78);
+      line-height: 1.75;
+    }
+
+    .cta-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.9rem;
+      margin-top: 1.5rem;
+    }
+
+    .cta-panel .button-primary {
+      background: var(--white);
+      color: var(--navy-900);
+    }
+
+    .cta-panel .button-secondary {
+      background: rgba(255, 255, 255, 0.08);
+      border-color: rgba(255, 255, 255, 0.18);
+      color: var(--white);
+    }
+
+    .site-footer {
+      padding: 2rem 0 3rem;
+    }
+
+    .footer-shell {
+      padding: 1.6rem;
+      border-radius: 28px;
+      background: linear-gradient(155deg, #102849, #081426 62%);
+      color: var(--white);
+      box-shadow: var(--shadow);
+    }
+
+    .footer-grid {
+      display: grid;
+      grid-template-columns: minmax(0, 1.15fr) repeat(2, minmax(180px, 0.5fr));
+      gap: 1.5rem;
+      align-items: start;
+    }
+
+    .footer-brand h2,
+    .footer-column h3 {
+      margin: 0 0 0.7rem;
+      line-height: 1.05;
+    }
+
+    .footer-brand h2 {
+      font-size: 1.5rem;
+    }
+
+    .footer-brand p,
+    .footer-column p,
+    .footer-link-list a,
+    .footer-bottom {
+      color: rgba(255, 255, 255, 0.74);
+      line-height: 1.7;
+      font-size: 0.95rem;
+    }
+
+    .footer-link-list {
+      display: grid;
+      gap: 0.45rem;
+    }
+
+    .footer-link-list a:hover,
+    .footer-link-list a:focus-visible {
+      color: var(--white);
+    }
+
+    .footer-socials {
+      display: flex;
+      gap: 0.75rem;
+      margin-top: 1rem;
+    }
+
+    .footer-socials .icon-link {
+      background: rgba(255, 255, 255, 0.08);
+      border-color: rgba(255, 255, 255, 0.12);
+      color: var(--white);
+    }
+
+    .footer-bottom {
+      margin-top: 1.4rem;
+      padding-top: 1rem;
+      border-top: 1px solid rgba(255, 255, 255, 0.1);
+    }
+
+    @keyframes drift {
+      0%, 100% {
+        transform: translate3d(0, 0, 0);
+      }
+
+      50% {
+        transform: translate3d(0, 12px, 0);
+      }
+    }
+
+    @media (max-width: 960px) {
+      .hero-grid,
+      .section-header,
+      .card-grid,
+      .shot-grid,
+      .stat-strip,
+      .flow {
+        grid-template-columns: 1fr;
+      }
+
+      .hero {
+        padding-top: 3.5rem;
+      }
+
+      .footer-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    @media (max-width: 720px) {
+      .nav {
+        flex-direction: column;
+        align-items: stretch;
+      }
+
+      .nav-links {
+        justify-content: space-between;
+        flex-wrap: wrap;
+      }
+
+      .hero {
+        padding-top: 2.5rem;
+      }
+
+      .hero-actions,
+      .cta-actions {
+        flex-direction: column;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="page-shell">
+    <header class="site-header">
+      <div class="container nav">
+        <a class="brand" href="#top" aria-label="Access402 home">
+          <div class="brand-mark">
+            <img src="images/logo.png" alt="Access402 logo">
+          </div>
+          <div class="brand-copy">Access402</div>
+        </a>
+        <nav class="nav-links" aria-label="Primary navigation">
+          <a
+            class="icon-link"
+            href="https://x.com/jonathan_royere"
+            target="_blank"
+            rel="noreferrer"
+            aria-label="Jonathan Royere on X"
+          >
+            <svg viewBox="0 0 24 24" aria-hidden="true">
+              <path d="M18.9 2H22l-6.77 7.74L23.2 22h-6.25l-4.9-7.42L5.56 22H2.45l7.24-8.27L1.8 2h6.4l4.43 6.8L18.9 2Zm-1.09 18h1.73L7.26 3.9H5.4l12.41 16.1Z"></path>
+            </svg>
+          </a>
+          <a
+            class="icon-link"
+            href="https://github.com/JonathanRoyere/access402"
+            target="_blank"
+            rel="noreferrer"
+            aria-label="Access402 GitHub repository"
+          >
+            <svg viewBox="0 0 24 24" aria-hidden="true">
+              <path d="M12 .5C5.65.5.5 5.65.5 12c0 5.08 3.29 9.39 7.86 10.91.58.11.79-.25.79-.56 0-.27-.01-1.18-.02-2.14-3.2.7-3.88-1.36-3.88-1.36-.52-1.33-1.28-1.68-1.28-1.68-1.04-.71.08-.69.08-.69 1.16.08 1.76 1.19 1.76 1.19 1.02 1.75 2.69 1.24 3.35.95.1-.74.4-1.24.72-1.53-2.56-.29-5.26-1.28-5.26-5.69 0-1.26.45-2.29 1.19-3.1-.12-.29-.52-1.47.11-3.06 0 0 .97-.31 3.18 1.18a11.02 11.02 0 0 1 5.79 0c2.2-1.49 3.17-1.18 3.17-1.18.64 1.59.24 2.77.12 3.06.74.81 1.19 1.84 1.19 3.1 0 4.42-2.7 5.39-5.28 5.67.41.36.78 1.07.78 2.17 0 1.57-.01 2.83-.01 3.21 0 .31.21.67.8.56A11.5 11.5 0 0 0 23.5 12C23.5 5.65 18.35.5 12 .5Z"></path>
+            </svg>
+          </a>
+          <a class="button button-secondary" href="mailto:jonathan.royere+access402@gmail.com">Contact us</a>
+        </nav>
+      </div>
+    </header>
+
+    <main id="top">
+      <section class="hero">
+        <div class="container hero-grid">
+          <div data-aos="fade-up" data-aos-duration="900" data-aos-easing="ease-in-out-sine">
+            <h1>Sell content, data, and workflows to AI agents.</h1>
+            <p>
+              Access402 helps teams sell content, data, and workflows to AI agents through paid,
+              controlled access. The goal is to remove the operational friction from configuring
+              rules, monetization, and delivery so agents can pay to access the resources and
+              workflows they need.
+            </p>
+            <div class="hero-actions">
+              <a class="button button-primary" href="#platform">Read the platform vision</a>
+              <a class="button button-secondary" href="mailto:jonathan.royere+access402@gmail.com">Contact us</a>
+            </div>
+            <div class="hero-note">
+              A unified layer for paid agent access, designed to simplify setup from day one.
+            </div>
+          </div>
+
+          <aside class="hero-card product-shot" aria-label="Access402 payment screen" data-aos="fade-up" data-aos-duration="900" data-aos-delay="80" data-aos-easing="ease-in-out-sine">
+            <img src="images/screenshots/payment-screen.png" alt="Access402 payment screen showing wallet-based access checkout">
+            <div class="hero-shot-caption">
+              <strong>Wallet-based payment at the point of access</strong>
+              <span>Protected resources can present a clear payment screen, connect a compatible wallet, and unlock access with minimal user friction.</span>
+            </div>
+          </aside>
+        </div>
+      </section>
+
+      <section class="section" id="platform">
+        <div class="container" data-aos="fade-up" data-aos-duration="900" data-aos-easing="ease-in-out-sine">
+          <div class="section-header">
+            <h2>A simpler way to commercialize digital access</h2>
+            <p>
+              Access402 is focused on the layer between existing systems and AI agents: making
+              high-value content, data, workflows, files, and endpoints available through paid
+              access in a way that is controlled, priced, and operationally straightforward.
+            </p>
+          </div>
+
+          <div class="card-grid">
+            <article class="card">
+              <div class="card-icon" aria-hidden="true">
+                <svg viewBox="0 0 24 24">
+                  <path d="M6 3.75A2.25 2.25 0 0 0 3.75 6v12A2.25 2.25 0 0 0 6 20.25h12A2.25 2.25 0 0 0 20.25 18V9.75L14.25 3.75H6Zm0 1.5h7.5v4.5h4.5V18a.75.75 0 0 1-.75.75H6A.75.75 0 0 1 5.25 18V6A.75.75 0 0 1 6 5.25Zm2.25 7.5a.75.75 0 0 0 0 1.5h7.5a.75.75 0 0 0 0-1.5h-7.5Zm0 3a.75.75 0 0 0 0 1.5h5.25a.75.75 0 0 0 0-1.5H8.25Z"></path>
+                </svg>
+              </div>
+              <h3>Content access</h3>
+              <p>
+                Articles, premium libraries, structured pages, and knowledge collections can be
+                gated and monetized instead of being left as unmanaged machine-readable inventory.
+              </p>
+            </article>
+            <article class="card">
+              <div class="card-icon" aria-hidden="true">
+                <svg viewBox="0 0 24 24">
+                  <path d="M3.75 7.5A2.25 2.25 0 0 1 6 5.25h4.28c.6 0 1.17.24 1.59.66l1.24 1.24c.14.14.33.22.53.22H18A2.25 2.25 0 0 1 20.25 9.6V18A2.25 2.25 0 0 1 18 20.25H6A2.25 2.25 0 0 1 3.75 18V7.5Zm2.25-.75a.75.75 0 0 0-.75.75v.75h13.5V9.6a.75.75 0 0 0-.75-.75h-4.36a2.25 2.25 0 0 1-1.59-.66l-1.24-1.24a.75.75 0 0 0-.53-.22H6ZM5.25 9.75V18c0 .41.34.75.75.75h12a.75.75 0 0 0 .75-.75V9.75H5.25Z"></path>
+                </svg>
+              </div>
+              <h3>File delivery</h3>
+              <p>
+                Reports, exports, media packages, generated bundles, and gated downloads can be
+                delivered as controlled products with clear pricing and fulfillment rules.
+              </p>
+            </article>
+            <article class="card">
+              <div class="card-icon" aria-hidden="true">
+                <svg viewBox="0 0 24 24">
+                  <path d="M6.5 6A2.5 2.5 0 1 0 6.5 11 2.5 2.5 0 0 0 6.5 6Zm11 0A2.5 2.5 0 1 0 17.5 11 2.5 2.5 0 0 0 17.5 6ZM6.5 13A2.5 2.5 0 1 0 6.5 18 2.5 2.5 0 0 0 6.5 13Zm1-3.1h9a.75.75 0 0 0 0-1.5h-9a.75.75 0 0 0 0 1.5Zm0 7h9a.75.75 0 0 0 0-1.5h-9a.75.75 0 0 0 0 1.5Zm8.97-5.44a.75.75 0 0 0-1.06 1.06l1.72 1.72-1.72 1.72a.75.75 0 1 0 1.06 1.06l2.25-2.25a.75.75 0 0 0 0-1.06l-2.25-2.25Z"></path>
+                </svg>
+              </div>
+              <h3>Endpoint monetization</h3>
+              <p>
+                APIs and other endpoints can be protected, packaged, and monetized rather than
+                exposed through fragmented access logic and manual operational work.
+              </p>
+            </article>
+          </div>
+
+          <div class="stat-strip" aria-label="Access402 principles">
+            <div class="stat">
+              <div class="stat-number">Content</div>
+              <div class="stat-copy">Structured information can be gated and sold with clearer access policies.</div>
+            </div>
+            <div class="stat">
+              <div class="stat-number">Files</div>
+              <div class="stat-copy">Downloads, exports, and generated deliverables can become controlled products.</div>
+            </div>
+            <div class="stat">
+              <div class="stat-number">Endpoints</div>
+              <div class="stat-copy">Machine-facing interfaces can be protected and monetized through one access layer.</div>
+            </div>
+            <div class="stat">
+              <div class="stat-number">Setup</div>
+              <div class="stat-copy">The platform is designed to reduce the setup burden from access control to delivery.</div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="section" id="screens">
+        <div class="container" data-aos="fade-up" data-aos-duration="900" data-aos-easing="ease-in-out-sine">
+          <div class="section-header">
+            <h2>Product views</h2>
+            <p>
+              Access402 is designed to make paid agent access, content rules, and operational
+              visibility feel concrete and manageable for teams selling digital products.
+            </p>
+          </div>
+
+          <div class="shot-grid">
+            <article class="shot-card" data-aos="fade-up" data-aos-duration="900" data-aos-delay="40" data-aos-easing="ease-in-out-sine">
+              <img src="images/screenshots/rules.png" alt="Access402 rules screen showing pricing and path-based access rules" loading="lazy">
+              <div class="shot-copy">
+                <h3>Rules</h3>
+                <p>Define path and endpoint rules, pricing, unlock behavior, and policy ordering from one place.</p>
+              </div>
+            </article>
+
+            <article class="shot-card" data-aos="fade-up" data-aos-duration="900" data-aos-delay="100" data-aos-easing="ease-in-out-sine">
+              <img src="images/screenshots/access.png" alt="Access402 access screen showing trusted wallets, IPs, and bypass controls" loading="lazy">
+              <div class="shot-copy">
+                <h3>Access controls</h3>
+                <p>Manage role bypasses, trusted wallets, and trusted IPs without scattered custom configuration.</p>
+              </div>
+            </article>
+
+            <article class="shot-card" data-aos="fade-up" data-aos-duration="900" data-aos-delay="160" data-aos-easing="ease-in-out-sine">
+              <img src="images/screenshots/logs.png" alt="Access402 logs screen showing decisions and payment activity" loading="lazy">
+              <div class="shot-copy">
+                <h3>Logs</h3>
+                <p>Review payment-required decisions, allowed requests, and bypass activity with operational visibility.</p>
+              </div>
+            </article>
+          </div>
+        </div>
+      </section>
+
+      <section class="section" id="how-it-works">
+        <div class="container" data-aos="fade-up" data-aos-duration="900" data-aos-easing="ease-in-out-sine">
+          <div class="section-header">
+            <h2>How the model works</h2>
+            <p>
+              Access402 is built around a practical model: connect the systems teams already use,
+              define paid access once, and make it easier for AI agents to buy and retrieve the
+              content, data, and workflows they need.
+            </p>
+          </div>
+
+          <div class="flow">
+            <article class="flow-step">
+              <strong>01</strong>
+              <h3>Connect existing systems</h3>
+              <p>
+                Start with the systems that already own the content, files, or machine-facing
+                interfaces. That is where the business value already exists.
+              </p>
+            </article>
+            <article class="flow-step">
+              <strong>02</strong>
+              <h3>Define access and pricing</h3>
+              <p>
+                Set the rules for what is open, protected, metered, or premium, and determine how
+                those assets or endpoints should be packaged and monetized.
+              </p>
+            </article>
+            <article class="flow-step">
+              <strong>03</strong>
+              <h3>Deliver with less friction</h3>
+              <p>
+                Let AI agents request approved outputs through a cleaner access layer, with payment,
+                monetization, and fulfillment built into the flow.
+              </p>
+            </article>
+          </div>
+        </div>
+      </section>
+
+      <section class="section" id="launch">
+        <div class="container" data-aos="fade-up" data-aos-duration="900" data-aos-easing="ease-in-out-sine">
+          <div class="cta-panel">
+            <h2>Remove the setup friction from selling to AI agents.</h2>
+            <p>
+              If a team already has content, data, workflows, files, or endpoints worth selling,
+              Access402 is being built to make paid agent access far easier to set up and manage.
+            </p>
+            <div class="cta-actions">
+              <a class="button button-primary" href="mailto:jonathan.royere+access402@gmail.com">Contact us</a>
+              <a class="button button-secondary" href="https://github.com/JonathanRoyere/access402" target="_blank" rel="noreferrer">View GitHub repo</a>
+            </div>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <footer class="site-footer">
+      <div class="container footer-shell" data-aos="fade-up" data-aos-duration="900" data-aos-easing="ease-in-out-sine">
+        <div class="footer-grid">
+          <div class="footer-brand">
+            <h2>Access402</h2>
+            <p>
+              Infrastructure for selling content, data, workflows, files, and endpoints to AI agents through paid access.
+            </p>
+            <div class="footer-socials">
+              <a
+                class="icon-link"
+                href="https://github.com/JonathanRoyere/access402"
+                target="_blank"
+                rel="noreferrer"
+                aria-label="Access402 GitHub repository"
+              >
+                <svg viewBox="0 0 24 24" aria-hidden="true">
+                  <path d="M12 .5C5.65.5.5 5.65.5 12c0 5.08 3.29 9.39 7.86 10.91.58.11.79-.25.79-.56 0-.27-.01-1.18-.02-2.14-3.2.7-3.88-1.36-3.88-1.36-.52-1.33-1.28-1.68-1.28-1.68-1.04-.71.08-.69.08-.69 1.16.08 1.76 1.19 1.76 1.19 1.02 1.75 2.69 1.24 3.35.95.1-.74.4-1.24.72-1.53-2.56-.29-5.26-1.28-5.26-5.69 0-1.26.45-2.29 1.19-3.1-.12-.29-.52-1.47.11-3.06 0 0 .97-.31 3.18 1.18a11.02 11.02 0 0 1 5.79 0c2.2-1.49 3.17-1.18 3.17-1.18.64 1.59.24 2.77.12 3.06.74.81 1.19 1.84 1.19 3.1 0 4.42-2.7 5.39-5.28 5.67.41.36.78 1.07.78 2.17 0 1.57-.01 2.83-.01 3.21 0 .31.21.67.8.56A11.5 11.5 0 0 0 23.5 12C23.5 5.65 18.35.5 12 .5Z"></path>
+                </svg>
+              </a>
+              <a
+                class="icon-link"
+                href="https://x.com/jonathan_royere"
+                target="_blank"
+                rel="noreferrer"
+                aria-label="Jonathan Royere on X"
+              >
+                <svg viewBox="0 0 24 24" aria-hidden="true">
+                  <path d="M18.9 2H22l-6.77 7.74L23.2 22h-6.25l-4.9-7.42L5.56 22H2.45l7.24-8.27L1.8 2h6.4l4.43 6.8L18.9 2Zm-1.09 18h1.73L7.26 3.9H5.4l12.41 16.1Z"></path>
+                </svg>
+              </a>
+            </div>
+          </div>
+
+          <div class="footer-column">
+            <h3>Contact</h3>
+            <div class="footer-link-list">
+              <a href="mailto:jonathan.royere+access402@gmail.com">jonathan.royere@gmail.com</a>
+              <a href="https://x.com/jonathan_royere" target="_blank" rel="noreferrer">x.com/jonathan_royere</a>
+              <a href="https://github.com/JonathanRoyere/access402" target="_blank" rel="noreferrer">github.com/JonathanRoyere/access402</a>
+            </div>
+          </div>
+
+          <div class="footer-column">
+            <h3>Location</h3>
+            <p>Boston, Massachusetts</p>
+          </div>
+        </div>
+        <div class="footer-bottom">
+          Built for teams that want to sell content and workflows to AI agents without the usual setup and monetization overhead.
+        </div>
+      </div>
+    </footer>
+  </div>
+  <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+  <script>
+    AOS.init({
+      once: true,
+      mirror: false,
+      duration: 900,
+      easing: "ease-in-out-sine",
+      offset: 60,
+      anchorPlacement: "top-bottom"
+    });
+  </script>
+</body>
+</html>
